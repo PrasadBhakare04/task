@@ -3,15 +3,15 @@ const db = require('../db');
 const router = express.Router();
 
 router.post('/addSchool', (req, res) => {
-    const { name, address, latitude, longitude } = req.body;
+    const { id, name, address, latitude, longitude } = req.body;
 
 
-    if (!name || !address || !latitude || !longitude) {
+    if (!id || !name || !address || !latitude || !longitude) {
         return res.status(400).json({ message: 'All fields are required.' });
     }
 
-    const query = 'INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)';
-    db.query(query, [name, address, latitude, longitude], (err) => {
+    const query = 'INSERT INTO schools (id, name, address, latitude, longitude) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [id, name, address, latitude, longitude], (err) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Database error.' });
